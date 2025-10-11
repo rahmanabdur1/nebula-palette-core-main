@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Dark crypto theme colors with deep blue */
+    --background: 215 25% 6%;
+    --foreground: 220 60% 85%;
+
+    --card: 220 13% 10%;
+    --card-foreground: 220 60% 85%;
+
+    --popover: 220 13% 10%;
+    --popover-foreground: 220 60% 85%;
+
+    --primary: 220 80% 50%;
+    --primary-foreground: 220 60% 85%;
+    --primary-glow: 220 100% 70%;
+
+    --secondary: 220 50% 25%;
+    --secondary-foreground: 220 60% 85%;
+
+    --muted: 220 30% 20%;
+    --muted-foreground: 220 40% 70%;
+
+    --accent: 220 80% 50%;
+    --accent-foreground: 220 60% 85%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 220 60% 85%;
+
+    --border: 220 60% 30%;
+    --input: 220 50% 25%;
+    --ring: 220 80% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradient colors - deep blue theme */
+    --gradient-start: 220 80% 50%;
+    --gradient-mid: 240 70% 45%;
+    --gradient-end: 260 60% 40%;
+    
+    /* Deep blue gradients */
+    --gradient-blue-start: 220 60% 20%;
+    --gradient-blue-mid: 240 70% 30%;
+    --gradient-blue-end: 260 80% 40%;
+    
+    /* Glassmorphism with deep blue */
+    --glass-bg: 220 30% 15% / 0.8;
+    --glass-border: 220 70% 50% / 0.4;
+    
+    /* Glow effects - deep blue */
+    --glow-primary: 220 80% 50% / 0.5;
+    --glow-secondary: 240 70% 45% / 0.4;
+
+    --sidebar-background: 220 50% 15%;
+    --sidebar-foreground: 220 60% 85%;
+    --sidebar-primary: 220 80% 50%;
+    --sidebar-primary-foreground: 220 60% 85%;
+    --sidebar-accent: 220 40% 20%;
+    --sidebar-accent-foreground: 220 60% 85%;
+    --sidebar-border: 220 60% 30%;
+    --sidebar-ring: 220 80% 50%;
+  }
+
+  .dark {
+    /* Keep same deep blue colors as light mode */
+    --background: 215 25% 6%;
+    --foreground: 220 60% 85%;
+
+    --card: 220 13% 10%;
+    --card-foreground: 220 60% 85%;
+
+    --popover: 220 13% 10%;
+    --popover-foreground: 220 60% 85%;
+
+    --primary: 220 80% 50%;
+    --primary-foreground: 220 60% 85%;
+
+    --secondary: 220 50% 25%;
+    --secondary-foreground: 220 60% 85%;
+
+    --muted: 220 30% 20%;
+    --muted-foreground: 220 40% 70%;
+
+    --accent: 220 80% 50%;
+    --accent-foreground: 220 60% 85%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 220 60% 85%;
+
+    --border: 220 60% 30%;
+    --input: 220 50% 25%;
+    --ring: 220 80% 50%;
+    --sidebar-background: 220 50% 15%;
+    --sidebar-foreground: 220 60% 85%;
+    --sidebar-primary: 220 80% 50%;
+    --sidebar-primary-foreground: 220 60% 85%;
+    --sidebar-accent: 220 40% 20%;
+    --sidebar-accent-foreground: 220 60% 85%;
+    --sidebar-border: 220 60% 30%;
+    --sidebar-ring: 220 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-screen;
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(220 13% 8%));
+  }
+  
+  /* Custom utilities */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
+  }
+  
+  .gradient-blue {
+    background: linear-gradient(135deg, hsl(var(--gradient-blue-start)), hsl(var(--gradient-blue-mid)), hsl(var(--gradient-blue-end)));
+  }
+  
+  .glass-card {
+    background: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(20px);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 40px hsl(var(--glow-primary)), 0 0 80px hsl(var(--glow-secondary));
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary-glow));
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 20px hsl(var(--glow-primary)); }
+    to { box-shadow: 0 0 40px hsl(var(--glow-primary)), 0 0 80px hsl(var(--glow-secondary)); }
+  }
+}
