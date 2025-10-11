@@ -23,11 +23,6 @@ const Transactions = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto space-y-8 px-4">
-        {/* <div className="flex justify-center gap-6">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-16 w-40 rounded-full" />
-          ))}
-        </div> */}
         <div className="flex justify-center gap-8">
           <Skeleton className="h-16 w-48 rounded-lg" />
           <Skeleton className="h-16 w-48 rounded-lg" />
@@ -39,30 +34,17 @@ const Transactions = () => {
 
   return (
     <div className="max-w-7xl mx-auto space-y-8 px-4">
-      {/* Header Badges */}
-      {/* <div className="flex justify-center gap-6 flex-wrap">
-        <Button variant="default" className="bg-gradient-to-r from-success to-success/80 hover:from-success/90 hover:to-success/70 text-black font-semibold px-10 py-3 text-lg rounded-full shadow-lg shadow-success/30 transition-all duration-300">
-          Millionaire
-        </Button>
-        <Button variant="outline" className="border-2 border-primary/40 text-foreground hover:bg-primary/10 px-10 py-3 text-lg rounded-full transition-all duration-300">
-          Billionaire
-        </Button>
-        <Button variant="outline" className="border-2 border-primary/40 text-foreground hover:bg-primary/10 px-10 py-3 text-lg rounded-full transition-all duration-300">
-          Trillionaire
-        </Button>
-      </div> */}
-
       {/* Power Matrix and Power Global Buttons */}
       <div className="flex justify-center gap-8 flex-wrap">
         <Button
           variant="default"
-          className="bg-gradient-to-r from-success to-success/80 hover:from-success/90 hover:to-success/70 text-black font-semibold px-16 py-4 text-lg rounded-lg shadow-lg shadow-success/30 transition-all duration-300"
+          className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white font-semibold px-16 py-4 text-lg rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
         >
           Future Matrix
         </Button>
         <Button
           variant="outline"
-          className="border-2 border-primary/40 bg-primary/5 text-foreground hover:bg-primary/15 px-16 py-4 text-lg rounded-lg transition-all duration-300"
+          className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-16 py-4 text-lg rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
         >
           Future Global
         </Button>
@@ -72,23 +54,26 @@ const Transactions = () => {
       <div className="flex justify-center gap-6">
         <Button
           variant="default"
-          className="bg-gradient-to-r from-success to-success/80 hover:from-success/90 hover:to-success/70 text-black font-semibold px-12 py-3 rounded-lg shadow-lg shadow-success/30 transition-all duration-300"
+          className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white font-semibold px-12 py-3 rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
         >
           Self
         </Button>
         <Button
           variant="outline"
-          className="border-2 border-primary/40 bg-primary/5 text-foreground hover:bg-primary/15 px-12 py-3 rounded-lg transition-all duration-300"
+          className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-12 py-3 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
         >
           Earning
         </Button>
       </div>
 
       {/* Transactions Table */}
-      <div className="glass-card rounded-xl p-6 border-2 border-primary/30 bg-gradient-to-br from-primary/5 via-card to-accent/5 shadow-xl">
-        <div className="overflow-hidden rounded-xl border-2 border-primary/30 shadow-lg">
+      <div className="glass-card rounded-xl p-6 border-2 border-green-500/40 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 shadow-2xl relative overflow-hidden">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-teal-500/5 animate-pulse-slow"></div>
+
+        <div className="relative overflow-hidden rounded-xl border-2 border-green-500/40 shadow-2xl">
           {/* Table Header */}
-          <div className="grid grid-cols-5 bg-gradient-to-r from-success to-success/80 text-black font-semibold">
+          <div className="grid grid-cols-5 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white font-semibold relative">
             <div className="px-6 py-5 text-center">Amount</div>
             <div className="px-6 py-5 text-center">Type</div>
             <div className="px-6 py-5 text-center">User</div>
@@ -97,31 +82,33 @@ const Transactions = () => {
           </div>
 
           {/* Table Body */}
-          <div className="bg-gradient-to-br from-card via-primary/5 to-accent/5">
+          <div className="bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-teal-500/5 relative">
             {transactionData.map((transaction, index) => (
               <div
                 key={index}
-                className="grid grid-cols-5 border-b border-primary/20 last:border-b-0"
+                className="grid grid-cols-5 border-b border-green-500/30 last:border-b-0 hover:bg-gradient-to-r hover:from-green-500/10 hover:via-emerald-500/5 hover:to-teal-500/5 transition-all duration-500 group"
               >
-                <div className="px-6 py-4 text-center text-foreground font-semibold text-lg">
+                <div className="px-6 py-4 text-center text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text font-semibold text-lg group-hover:scale-105 transition-transform">
                   {transaction.amount}
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <div className="text-foreground font-medium">
+                  <div className="text-foreground font-medium group-hover:text-green-500 transition-colors">
                     {transaction.type}
                   </div>
-                  <div className="text-success text-sm">{transaction.slot}</div>
+                  <div className="text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-sm font-semibold">
+                    {transaction.slot}
+                  </div>
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <div className="bg-muted/30 text-foreground px-4 py-2 rounded-full font-mono text-sm">
+                  <div className="bg-gradient-to-r from-green-500/15 via-emerald-500/10 to-teal-500/5 text-foreground px-4 py-2 rounded-full font-mono text-sm border border-green-500/30 group-hover:border-green-500/60 group-hover:shadow-lg group-hover:shadow-green-500/20 transition-all duration-500">
                     {transaction.user}
                   </div>
                 </div>
-                <div className="px-6 py-4 text-center text-muted-foreground">
+                <div className="px-6 py-4 text-center text-muted-foreground group-hover:text-green-400 transition-colors">
                   {transaction.time}
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <span className="text-success font-mono text-sm">
+                  <span className="text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text font-mono text-sm font-semibold group-hover:scale-105 transition-transform inline-block">
                     {transaction.trx}
                   </span>
                 </div>
@@ -131,22 +118,22 @@ const Transactions = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center gap-4 mt-8">
+        <div className="flex justify-center gap-4 mt-8 relative">
           <Button
             variant="outline"
-            className="border-2 border-primary/40 bg-primary/5 text-foreground hover:bg-primary/15 px-8 py-2 rounded-lg transition-all duration-300"
+            className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
           >
             Prev
           </Button>
           <Button
             variant="default"
-            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-6 py-2 rounded-lg shadow-lg shadow-primary/30 transition-all duration-300"
+            className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
           >
             1
           </Button>
           <Button
             variant="outline"
-            className="border-2 border-primary/40 bg-primary/5 text-foreground hover:bg-primary/15 px-8 py-2 rounded-lg transition-all duration-300"
+            className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
           >
             Next
           </Button>

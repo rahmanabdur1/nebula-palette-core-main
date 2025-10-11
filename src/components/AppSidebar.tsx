@@ -37,7 +37,6 @@ const navigationItems = [
     url: "/",
     icon: LayoutDashboard,
   },
-
   {
     title: "User Profile",
     url: "/profile",
@@ -102,19 +101,21 @@ export function AppSidebar() {
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar className="border-r border-border bg-sidebar">
+    <Sidebar className="border-r border-green-500/20 bg-gradient-to-b from-green-500/5 via-emerald-500/3 to-teal-500/5">
       <SidebarContent>
         {/* Logo */}
         <div className="flex items-center gap-2 px-4 py-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30">
             <Coins className="h-6 w-6 text-white" />
           </div>
           {!isCollapsed && (
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-foreground">
+              <span className="text-lg font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text">
                 FUTURE PRO
               </span>
-              <span className="text-sm text-warning font-medium">SPACE</span>
+              <span className="text-sm text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text font-medium">
+                SPACE
+              </span>
             </div>
           )}
         </div>
@@ -127,10 +128,10 @@ export function AppSidebar() {
                   <>
                     <SidebarMenuButton
                       onClick={() => setExpandedPrograms(!expandedPrograms)}
-                      className={`${
+                      className={`relative transition-all duration-500 ${
                         item.submenu.some((sub) => isActive(sub.url))
-                          ? "bg-success/20 text-success"
-                          : ""
+                          ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 border-r-4 border-green-500 shadow-lg shadow-green-500/10"
+                          : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
                       }`}
                     >
                       <item.icon className="h-4 w-4" />
@@ -138,9 +139,9 @@ export function AppSidebar() {
                         <>
                           <span className="text-base">{item.title}</span>
                           {expandedPrograms ? (
-                            <ChevronDown className="ml-auto h-4 w-4" />
+                            <ChevronDown className="ml-auto h-4 w-4 transition-transform duration-300" />
                           ) : (
-                            <ChevronRight className="ml-auto h-4 w-4" />
+                            <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-300" />
                           )}
                         </>
                       )}
@@ -153,15 +154,17 @@ export function AppSidebar() {
                               <NavLink
                                 to={subItem.url}
                                 className={({ isActive }) =>
-                                  `flex items-center gap-2 px-3 py-2 text-sm ${
+                                  `flex items-center gap-2 px-3 py-2 text-sm transition-all duration-500 relative overflow-hidden group ${
                                     isActive
-                                      ? "bg-success/20 text-success font-medium"
-                                      : "text-muted-foreground hover:text-foreground"
+                                      ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 font-medium border-r-4 border-green-500 shadow-lg shadow-green-500/10"
+                                      : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
                                   }`
                                 }
                               >
-                                <subItem.icon className="h-4 w-4" />
-                                <span className="text-base">
+                                {/* Animated background effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <subItem.icon className="h-4 w-4 relative z-10" />
+                                <span className="text-base relative z-10">
                                   {subItem.title}
                                 </span>
                               </NavLink>
@@ -177,16 +180,20 @@ export function AppSidebar() {
                       to={item.url}
                       end
                       className={({ isActive }) =>
-                        `flex items-center gap-2 px-3 py-2 ${
+                        `flex items-center gap-2 px-3 py-2 transition-all duration-500 relative overflow-hidden group ${
                           isActive
-                            ? "bg-success/20 text-success font-medium"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 font-medium border-r-4 border-green-500 shadow-lg shadow-green-500/10"
+                            : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
                         }`
                       }
                     >
-                      <item.icon className="h-4 w-4" />
+                      {/* Animated background effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <item.icon className="h-4 w-4 relative z-10" />
                       {!isCollapsed && (
-                        <span className="text-base">{item.title}</span>
+                        <span className="text-base relative z-10">
+                          {item.title}
+                        </span>
                       )}
                     </NavLink>
                   </SidebarMenuButton>
