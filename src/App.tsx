@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import AdminDashboard from "./pages/AdminDashboard";
 import Index from "./pages/Index";
-import Meta from "./pages/Meta";
+
 import Profile from "./pages/Profile";
 import Team from "./pages/Team";
 import Transactions from "./pages/Transactions";
@@ -30,11 +30,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Layout>
-        <Routes>
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/" element={<Index />} />
-          <Route path="/meta" element={<Meta />} />
-          <Route path="/profile" element={<Profile />} />
+          <Routes>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/" element={<Index />} />
+
+            <Route path="/profile" element={<Profile />} />
             <Route path="/team" element={<Team />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/slots" element={<Slots />} />

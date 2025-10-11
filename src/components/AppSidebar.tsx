@@ -6,7 +6,6 @@ import {
   Users,
   TrendingUp,
   Sliders,
-  UserCheck,
   Gamepad2,
   DollarSign,
   ArrowRightLeft,
@@ -17,15 +16,12 @@ import {
   Gift,
   Pickaxe,
   Shield,
-  Globe,
 } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
