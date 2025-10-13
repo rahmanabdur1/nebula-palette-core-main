@@ -1,253 +1,3 @@
-// import { useState, ChangeEvent } from "react";
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import {
-//   User,
-//   Edit,
-//   Save,
-//   X,
-//   Mail,
-//   Phone,
-//   Calendar,
-//   Shield,
-//   Wallet,
-//   Camera,
-// } from "lucide-react";
-
-// // Define the form data type
-// interface FormData {
-//   username: string;
-//   email: string;
-//   phone: string;
-//   joinDate: string;
-//   membershipLevel: string;
-//   walletAddress: string;
-//   userImage: string;
-// }
-
-// export default function AccountInfoCard() {
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [formData, setFormData] = useState<FormData>({
-//     username: "John Doe",
-//     email: "john@example.com",
-//     phone: "+8801712345678",
-//     joinDate: "01 Jan 2023",
-//     membershipLevel: "Gold Member",
-//     walletAddress: "0x5f...e29a",
-//     userImage: "",
-//   });
-
-//   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-//     const { name, value, files } = e.target;
-
-//     // If the input is an image file
-//     if (name === "userImage" && files && files[0]) {
-//       const imageUrl = URL.createObjectURL(files[0]);
-//       setFormData((prev) => ({ ...prev, userImage: imageUrl }));
-//     } else {
-//       // For all text fields
-//       setFormData((prev) => ({
-//         ...prev,
-//         [name]: value,
-//       }));
-//     }
-//   };
-
-//   const handleSave = () => {
-//     setIsEditing(false);
-//     console.log("Saved data:", formData);
-//   };
-
-//   return (
-//     <div className="glass-card rounded-xl border-2 border-success/30 bg-gradient-to-br from-success/10 via-primary/5 to-accent/10 shadow-xl relative overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-4xl mx-auto">
-//       {/* Decorative floating bars */}
-//       <div className="absolute top-2 right-2 opacity-20">
-//         <div className="flex gap-1 sm:gap-2 md:gap-3">
-//           {[...Array(3)].map((_, i) => (
-//             <div
-//               key={i}
-//               className="h-6 w-2 sm:h-8 sm:w-3 md:h-10 md:w-4 rounded-full animate-float"
-//               style={{
-//                 background: `linear-gradient(45deg, hsl(var(--success)), hsl(var(--primary)))`,
-//                 animationDelay: `${i * 0.2}s`,
-//               }}
-//             />
-//           ))}
-//         </div>
-//       </div>
-
-//       <div className="flex items-center justify-between mb-6">
-//         <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-//           Account Information
-//         </h2>
-
-//         {!isEditing ? (
-//           <Button
-//             onClick={() => setIsEditing(true)}
-//             className="bg-gradient-to-r from-primary to-success hover:from-primary/80 hover:to-success/80 hover:shadow-lg transition-all border-0 text-white h-9 sm:h-10 px-3 sm:px-4 text-sm"
-//           >
-//             <Edit className="h-4 w-4 mr-2" />
-//             Edit Profile
-//           </Button>
-//         ) : (
-//           <div className="flex gap-2">
-//             <Button
-//               onClick={handleSave}
-//               className="bg-success hover:bg-success/80 text-white border-0 h-9 sm:h-10 px-3 sm:px-4 text-sm"
-//             >
-//               <Save className="h-4 w-4 mr-1" />
-//               Save
-//             </Button>
-//             <Button
-//               variant="outline"
-//               onClick={() => setIsEditing(false)}
-//               className="border-red-500/50 text-red-400 hover:bg-red-500/10 h-9 sm:h-10 px-3 sm:px-4 text-sm"
-//             >
-//               <X className="h-4 w-4 mr-1" />
-//               Cancel
-//             </Button>
-//           </div>
-//         )}
-//       </div>
-
-//       <div className="space-y-6">
-//         {/* Avatar + Username */}
-//         <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-primary/10 to-success/10 rounded-lg border border-success/20 flex-wrap">
-//           <div className="relative">
-//             {formData.userImage ? (
-//               <img
-//                 src={formData.userImage}
-//                 alt="User Avatar"
-//                 className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-success shadow-md"
-//               />
-//             ) : (
-//               <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-r from-primary to-success">
-//                 <User className="h-8 w-8 text-white" />
-//               </div>
-//             )}
-
-//             {isEditing && (
-//               <label
-//                 htmlFor="userImage"
-//                 className="absolute bottom-0 right-0 bg-success text-white p-1.5 rounded-full cursor-pointer shadow-md hover:bg-success/80 transition h-7 w-7 flex items-center justify-center"
-//               >
-//                 <Camera className="h-4 w-4" />
-//                 <input
-//                   type="file"
-//                   id="userImage"
-//                   name="userImage"
-//                   accept="image/*"
-//                   onChange={handleChange}
-//                   className="hidden"
-//                 />
-//               </label>
-//             )}
-//           </div>
-
-//           <div className="flex-1 min-w-[180px]">
-//             <div className="text-sm text-muted-foreground">Username</div>
-//             {isEditing ? (
-//               <Input
-//                 name="username"
-//                 value={formData.username}
-//                 onChange={handleChange}
-//                 className="text-base font-semibold border-success/30 focus:border-success"
-//               />
-//             ) : (
-//               <div className="text-lg sm:text-xl font-bold text-foreground">
-//                 {formData.username}
-//               </div>
-//             )}
-//           </div>
-//         </div>
-
-//         {/* Editable Fields */}
-//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-//           {[
-//             {
-//               label: "Email",
-//               name: "email",
-//               icon: Mail,
-//               color: "text-primary",
-//               bgColor: "from-primary/10 to-primary/5",
-//               borderColor: "border-primary/20",
-//             },
-//             {
-//               label: "Phone",
-//               name: "phone",
-//               icon: Phone,
-//               color: "text-success",
-//               bgColor: "from-success/10 to-success/5",
-//               borderColor: "border-success/20",
-//             },
-//             {
-//               label: "Member Since",
-//               name: "joinDate",
-//               icon: Calendar,
-//               color: "text-warning",
-//               bgColor: "from-warning/10 to-warning/5",
-//               borderColor: "border-warning/20",
-//             },
-//             {
-//               label: "Membership Level",
-//               name: "membershipLevel",
-//               icon: Shield,
-//               color: "text-accent",
-//               bgColor: "from-accent/10 to-accent/5",
-//               borderColor: "border-accent/20",
-//             },
-//           ].map(({ label, name, icon: Icon, color, bgColor, borderColor }) => (
-//             <div
-//               key={name}
-//               className={`flex items-center gap-3 p-4 bg-gradient-to-r ${bgColor} rounded-lg border ${borderColor}`}
-//             >
-//               <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${color}`} />
-//               <div className="flex-1">
-//                 <div className="text-xs text-muted-foreground">{label}</div>
-//                 {isEditing ? (
-//                   <Input
-//                     name={name as keyof FormData}
-//                     value={formData[name as keyof FormData]}
-//                     onChange={handleChange}
-//                     className={`text-sm font-semibold ${borderColor} focus:${borderColor.replace(
-//                       "/20",
-//                       "/40"
-//                     )}`}
-//                   />
-//                 ) : (
-//                   <div className="text-sm font-semibold text-foreground">
-//                     {formData[name as keyof FormData]}
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Wallet Address */}
-//         <div className="p-4 bg-gradient-to-r from-primary/10 to-success/10 rounded-lg border border-success/20">
-//           <div className="flex items-center gap-3 mb-2">
-//             <Wallet className="h-5 w-5 sm:h-6 sm:w-6 text-success" />
-//             <div className="text-sm text-muted-foreground">Wallet Address</div>
-//           </div>
-//           {isEditing ? (
-//             <Input
-//               name="walletAddress"
-//               value={formData.walletAddress}
-//               onChange={handleChange}
-//               className="font-mono text-sm border-success/30 focus:border-success"
-//             />
-//           ) : (
-//             <div className="text-sm font-mono text-foreground break-all">
-//               {formData.walletAddress}
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 import { useState, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -256,19 +6,17 @@ import {
   Edit,
   Save,
   X,
-  Mail,
-  Phone,
   Calendar,
   Shield,
   Wallet,
   Camera,
+  Linkedin,
+  Twitter,
+  Facebook,
 } from "lucide-react";
 
-// Define the form data type
 interface FormData {
   username: string;
-  email: string;
-  phone: string;
   joinDate: string;
   membershipLevel: string;
   walletAddress: string;
@@ -279,8 +27,6 @@ export default function AccountInfoCard() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     username: "John Doe",
-    email: "john@example.com",
-    phone: "+8801712345678",
     joinDate: "01 Jan 2023",
     membershipLevel: "Gold Member",
     walletAddress: "0x5f...e29a",
@@ -289,17 +35,11 @@ export default function AccountInfoCard() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
-
-    // If the input is an image file
     if (name === "userImage" && files && files[0]) {
       const imageUrl = URL.createObjectURL(files[0]);
       setFormData((prev) => ({ ...prev, userImage: imageUrl }));
     } else {
-      // For all text fields
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -310,59 +50,9 @@ export default function AccountInfoCard() {
 
   return (
     <div className="glass-card rounded-xl border-2 border-green-500/30 bg-gradient-to-br from-green-500/10 via-green-400/5 to-emerald-500/10 shadow-xl relative overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-4xl mx-auto">
-      {/* Decorative floating bars */}
-      <div className="absolute top-2 right-2 opacity-20">
-        <div className="flex gap-1 sm:gap-2 md:gap-3">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="h-6 w-2 sm:h-8 sm:w-3 md:h-10 md:w-4 rounded-full animate-float"
-              style={{
-                background: `linear-gradient(45deg, hsl(142, 76%, 36%), hsl(142, 70%, 45%))`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-          Account Information
-        </h2>
-
-        {!isEditing ? (
-          <Button
-            onClick={() => setIsEditing(true)}
-            className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 hover:shadow-lg transition-all border-0 text-white h-9 sm:h-10 px-3 sm:px-4 text-sm shadow-md"
-          >
-            <Edit className="h-4 w-4 mr-2" />
-            Edit Profile
-          </Button>
-        ) : (
-          <div className="flex gap-2">
-            <Button
-              onClick={handleSave}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 h-9 sm:h-10 px-3 sm:px-4 text-sm shadow-md"
-            >
-              <Save className="h-4 w-4 mr-1" />
-              Save
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => setIsEditing(false)}
-              className="border-green-500/50 text-green-600 hover:bg-green-500/10 hover:border-green-500/70 h-9 sm:h-10 px-3 sm:px-4 text-sm"
-            >
-              <X className="h-4 w-4 mr-1" />
-              Cancel
-            </Button>
-          </div>
-        )}
-      </div>
-
-      <div className="space-y-6">
-        {/* Avatar + Username */}
-        <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 flex-wrap">
+      {/* Avatar + Username + Socials */}
+      <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 flex-wrap justify-between relative">
+        <div className="flex items-center gap-4 relative">
           <div className="relative">
             {formData.userImage ? (
               <img
@@ -376,6 +66,7 @@ export default function AccountInfoCard() {
               </div>
             )}
 
+            {/* Camera Icon */}
             {isEditing && (
               <label
                 htmlFor="userImage"
@@ -391,6 +82,18 @@ export default function AccountInfoCard() {
                   className="hidden"
                 />
               </label>
+            )}
+
+            {/* Edit Button */}
+            {!isEditing && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setIsEditing(true)}
+                className="absolute top-0 right-0 h-7 w-7 p-0 flex items-center justify-center border-green-500/50 text-green-600 hover:bg-green-500/10 hover:border-green-500/70"
+              >
+                <Edit className="h-4 w-4" />
+              </Button>
             )}
           </div>
 
@@ -411,74 +114,87 @@ export default function AccountInfoCard() {
           </div>
         </div>
 
-        {/* Editable Fields */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            {
-              label: "Email",
-              name: "email",
-              icon: Mail,
-              color: "text-green-500",
-              bgColor: "from-green-500/10 to-green-400/5",
-              borderColor: "border-green-500/20",
-            },
-            {
-              label: "Phone",
-              name: "phone",
-              icon: Phone,
-              color: "text-green-600",
-              bgColor: "from-green-600/10 to-green-500/5",
-              borderColor: "border-green-600/20",
-            },
-            {
-              label: "Member Since",
-              name: "joinDate",
-              icon: Calendar,
-              color: "text-emerald-500",
-              bgColor: "from-emerald-500/10 to-emerald-400/5",
-              borderColor: "border-emerald-500/20",
-            },
-            {
-              label: "Membership Level",
-              name: "membershipLevel",
-              icon: Shield,
-              color: "text-teal-500",
-              bgColor: "from-teal-500/10 to-teal-400/5",
-              borderColor: "border-teal-500/20",
-            },
-          ].map(({ label, name, icon: Icon, color, bgColor, borderColor }) => (
-            <div
-              key={name}
-              className={`flex items-center gap-3 p-4 bg-gradient-to-r ${bgColor} rounded-lg border ${borderColor} hover:shadow-md transition-shadow`}
+        {/* Social Media Icons */}
+        <div className="flex flex-wrap sm:flex-row gap-3 sm:gap-5 items-center">
+          {/* Telegram */}
+          <a
+            href="
+https://t.me/futureprospace_officialchannel"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500 transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 240 240"
+              className="h-4 w-4 sm:h-5 sm:w-5"
+              fill="currentColor"
             >
-              <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${color}`} />
-              <div className="flex-1">
-                <div className="text-xs text-muted-foreground">{label}</div>
-                {isEditing ? (
-                  <Input
-                    name={name as keyof FormData}
-                    value={formData[name as keyof FormData]}
-                    onChange={handleChange}
-                    className={`text-sm font-semibold ${borderColor} focus:${borderColor.replace(
-                      "/20",
-                      "/40"
-                    )} focus:ring-${color.replace("text-", "")}/20`}
-                  />
-                ) : (
-                  <div className="text-sm font-semibold text-foreground">
-                    {formData[name as keyof FormData]}
-                  </div>
-                )}
-              </div>
+              <path d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 120-53.73 120-120S186.27 0 120 0zm56.09 83.2l-18.88 88.98c-1.44 6.48-5.25 8.1-10.64 5.04l-29.44-21.7-14.2 13.66c-1.56 1.56-2.88 2.88-5.88 2.88l2.1-29.6 53.81-48.64c2.34-2.1-.51-3.3-3.63-1.2l-66.54 41.82-28.6-8.94c-6.2-1.92-6.3-6.2 1.28-9.18l111.4-42.96c5.2-1.92 9.8 1.28 8.3 9.44z" />
+            </svg>
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/username"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition"
+          >
+            <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
+          </a>
+
+          {/* Twitter */}
+          <a
+            href="https://twitter.com/username"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500 transition"
+          >
+            <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+          </a>
+
+          {/* Facebook */}
+          <a
+            href="https://www.facebook.com/junayedahmedniloy0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 hover:text-blue-800 transition"
+          >
+            <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+          </a>
+        </div>
+      </div>
+
+      {/* Details Grid */}
+      <div className="grid grid-cols-2  gap-4 mt-6">
+        {/* Member Since */}
+        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+          <div className="flex items-center gap-2 mb-1">
+            <Calendar className="h-5 w-5 text-green-500" />
+            <span className="text-sm text-muted-foreground">Member Since</span>
+          </div>
+          {isEditing ? (
+            <Input
+              name="joinDate"
+              value={formData.joinDate}
+              onChange={handleChange}
+              className="text-sm font-mono border-green-500/30 focus:border-green-500 focus:ring-green-500/20"
+            />
+          ) : (
+            <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+              {formData.joinDate}
             </div>
-          ))}
+          )}
         </div>
 
         {/* Wallet Address */}
         <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
-          <div className="flex items-center gap-3 mb-2">
-            <Wallet className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
-            <div className="text-sm text-muted-foreground">Wallet Address</div>
+          <div className="flex items-center gap-2 mb-1">
+            <Wallet className="h-5 w-5 text-green-500" />
+            <span className="text-sm text-muted-foreground">
+              Wallet Address
+            </span>
           </div>
           {isEditing ? (
             <Input
@@ -488,12 +204,53 @@ export default function AccountInfoCard() {
               className="font-mono text-sm border-green-500/30 focus:border-green-500 focus:ring-green-500/20"
             />
           ) : (
-            <div className="text-sm font-mono text-green-400 break-all bg-black/20 px-3 py-2 rounded border border-green-500/10">
+            <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
               {formData.walletAddress}
             </div>
           )}
         </div>
+
+        {/* User ID */}
+        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+          <div className="flex items-center gap-2 mb-1">
+            <User className="h-5 w-5 text-green-500" />
+            <span className="text-sm text-muted-foreground">User ID</span>
+          </div>
+          <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+            1856131324
+          </div>
+        </div>
+
+        {/* Ref By */}
+        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+          <div className="flex items-center gap-2 mb-1">
+            <User className="h-5 w-5 text-green-500" />
+            <span className="text-sm text-muted-foreground">Ref By</span>
+          </div>
+          <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+            4194951871
+          </div>
+        </div>
       </div>
+
+      {/* Save/Cancel Buttons */}
+      {isEditing && (
+        <div className="flex justify-end gap-2 mt-4">
+          <Button
+            onClick={handleSave}
+            className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 h-9 sm:h-10 px-4 text-sm shadow-md"
+          >
+            <Save className="h-4 w-4 mr-1" /> Save
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => setIsEditing(false)}
+            className="border-green-500/50 text-green-600 hover:bg-green-500/10 hover:border-green-500/70 h-9 sm:h-10 px-4 text-sm"
+          >
+            <X className="h-4 w-4 mr-1" /> Cancel
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

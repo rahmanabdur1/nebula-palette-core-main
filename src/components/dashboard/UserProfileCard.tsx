@@ -4,12 +4,13 @@ export function UserProfileCard() {
   return (
     <div
       className="glass-card rounded-xl border-2 border-green-500/30 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-teal-500/5 shadow-xl 
-                    p-4 sm:p-4 md:p-6 lg:p-8
-                    w-full  mx-auto "
+                  p-4 sm:p-4 md:p-6 lg:p-8
+                  w-full mx-auto"
     >
-      <div className="flex flex-col items-center space-y-4 sm:space-y-4 md:space-y-3">
+      {/* Responsive layout — column on small, row on large */}
+      <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center gap-6">
         {/* Avatar with gradient ring */}
-        <div className="relative flex justify-center">
+        <div className="relative flex justify-center lg:justify-start">
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-[2px] sm:p-[3px] md:p-[4px] lg:p-[5px]">
             <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-full bg-background"></div>
           </div>
@@ -22,7 +23,7 @@ export function UserProfileCard() {
         </div>
 
         {/* User Info */}
-        <div className="text-center space-y-1 sm:space-y-2 md:space-y-3">
+        <div className="text-center lg:text-left space-y-1 sm:space-y-2 md:space-y-3">
           <div className="text-xs sm:text-sm md:text-base text-muted-foreground">
             ID :{" "}
             <span className="text-foreground font-mono break-all">
