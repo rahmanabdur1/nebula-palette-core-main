@@ -30,7 +30,7 @@ export default function AccountInfoCard() {
     joinDate: "01 Jan 2023",
     membershipLevel: "Gold Member",
     walletAddress: "0x5f...e29a",
-    userImage: "",
+    userImage: "/logo.png",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

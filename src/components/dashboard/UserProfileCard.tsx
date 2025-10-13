@@ -8,14 +8,17 @@ export function UserProfileCard() {
                   w-full mx-auto"
     >
       {/* Responsive layout — column on small, row on large */}
-      <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center gap-6">
+      <div className="flex flex-row items-center lg:items-start lg:justify-center gap-6">
         {/* Avatar with gradient ring */}
         <div className="relative flex justify-center lg:justify-start">
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-[2px] sm:p-[3px] md:p-[4px] lg:p-[5px]">
             <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-full bg-background"></div>
           </div>
+
+          {/* Avatar Image */}
           <Avatar className="relative z-10 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28">
-            <AvatarImage src="/placeholder.svg" />
+            {/* ✅ Use your real image from /public/logo.png */}
+            <AvatarImage src="/logo.png" alt="User Avatar" />
             <AvatarFallback className="bg-muted text-xl sm:text-2xl md:text-3xl">
               RX
             </AvatarFallback>
@@ -23,7 +26,7 @@ export function UserProfileCard() {
         </div>
 
         {/* User Info */}
-        <div className="text-center lg:text-left space-y-1 sm:space-y-2 md:space-y-3">
+        <div className="text-start lg:text-left space-y-1 sm:space-y-2 md:space-y-3">
           <div className="text-xs sm:text-sm md:text-base text-muted-foreground">
             ID :{" "}
             <span className="text-foreground font-mono break-all">
