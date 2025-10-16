@@ -1,47 +1,51 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, User } from "lucide-react";
+
+const slotsData = [
+  { id: 1, users: 289985, price: 5 },
+  { id: 2, users: 37222, price: 6, active: true },
+  { id: 3, users: 29673, price: 16 },
+  { id: 4, users: 7401, price: 35 },
+  { id: 5, users: 5872, price: 99 },
+  { id: 6, users: 1039, price: 198 },
+  { id: 7, users: 698, price: 400 },
+  { id: 8, users: 148, price: 850 },
+  { id: 9, users: 72, price: 1700 },
+  { id: 10, users: 21, price: 3100 },
+  { id: 11, users: 16, price: 6200 },
+  { id: 12, users: 16, price: 10800 },
+];
 
 const SlotsDetail = () => {
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const { type } = useParams<{ type: string }>();
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
-  const matrixType = type === "global" ? "Future Global" : "Future Matrix";
-  const totalSlots = 12;
-  const activeSlots = type === "global" ? 1 : 1;
-
-  // Generate circular diagram segments
   const renderCircularDiagram = () => {
+    const totalSegments = 12;
+    const activeSegments = 8;
+    const colors = ["#00FF7F", "#8A2BE2", "#FFD700"];
     const segments = [];
-    const colors = [
-      "bg-green-500",
-      "bg-emerald-500",
-      "bg-teal-500",
-      "bg-green-400",
-      "bg-muted",
-    ];
 
-    for (let i = 0; i < 12; i++) {
-      const isActive = i < activeSlots;
-      const colorClass = isActive ? colors[i % colors.length] : "bg-muted";
+    for (let i = 0; i < totalSegments; i++) {
+      const isActive = i < activeSegments;
+      const color = isActive ? colors[i % colors.length] : "#333";
       segments.push(
         <div
           key={i}
-          className={`absolute w-full h-full ${colorClass}`}
+          className="absolute w-full h-full"
           style={{
             clipPath: `polygon(50% 50%, ${
               50 + 50 * Math.cos(((i * 30 - 90) * Math.PI) / 180)
             }% ${50 + 50 * Math.sin(((i * 30 - 90) * Math.PI) / 180)}%, ${
               50 + 50 * Math.cos((((i + 1) * 30 - 90) * Math.PI) / 180)
             }% ${50 + 50 * Math.sin((((i + 1) * 30 - 90) * Math.PI) / 180)}%)`,
-            opacity: isActive ? 1 : 0.3,
+            backgroundColor: color,
+            opacity: isActive ? 0.9 : 0.15,
           }}
         />
       );
@@ -49,216 +53,85 @@ const SlotsDetail = () => {
     return segments;
   };
 
-  const renderSlotGrid = () => {
-    const slots = [];
-    for (let i = 1; i <= totalSlots; i++) {
-      const isActive = i <= activeSlots;
-      const userName = isActive ? `User_${i}` : "Empty";
-      const status = isActive ? "Active" : "Inactive";
-      const amount = isActive ? Math.floor(Math.random() * 100000) : 0;
-
-      slots.push(
-        <div
-          key={i}
-          className={`glass-card rounded-xl p-6 border-2 transition-all duration-500
-                     ${
-                       isActive
-                         ? "border-green-500/60 bg-gradient-to-br from-green-500/20 via-emerald-500/10 to-background hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]"
-                         : "border-muted/30 bg-background/50 opacity-60"
-                     }
-                     hover:scale-105`}
-        >
-          <div className="flex flex-col items-center gap-3">
-            <div
-              className={`text-sm font-bold ${
-                isActive ? "text-green-500" : "text-muted-foreground"
-              }`}
-            >
-              Slot {i}
-            </div>
-
-            <div
-              className={`w-20 h-20 rounded-full flex items-center justify-center
-                           ${
-                             isActive
-                               ? "bg-gradient-to-br from-green-500/30 via-emerald-500/20 to-teal-500/30"
-                               : "bg-muted/20"
-                           }`}
-            >
-              <User
-                className={`w-10 h-10 ${
-                  isActive ? "text-green-500" : "text-muted-foreground"
-                }`}
-              />
-            </div>
-
-            <div className="text-center w-full">
-              <div
-                className={`text-sm font-medium ${
-                  isActive ? "text-green-500" : "text-muted-foreground"
-                }`}
-              >
-                {userName}
-              </div>
-              {isActive && (
-                <div className="text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-xs mt-1 font-semibold">
-                  {amount.toLocaleString()}
-                </div>
-              )}
-            </div>
-
-            <div
-              className={`text-xs px-3 py-1 rounded-full
-                           ${
-                             isActive
-                               ? "bg-green-500/20 text-green-500 border border-green-500/40"
-                               : "bg-muted/20 text-muted-foreground border border-muted/30"
-                           }`}
-            >
-              {status}
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return slots;
-  };
-
   if (loading) {
     return (
-      <div className="space-y-8 p-6">
-        <Skeleton className="h-16 w-full rounded-xl bg-green-500/10" />
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <Skeleton className="h-64 w-full rounded-xl bg-green-500/10" />
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-3 gap-4">
-              {[...Array(12)].map((_, i) => (
-                <Skeleton
-                  key={i}
-                  className="h-48 w-full rounded-xl bg-green-500/10"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 p-4">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <Skeleton
+            key={i}
+            className="h-40 w-full rounded-2xl bg-muted/30 mx-auto"
+          />
+        ))}
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 p-6 max-w-7xl mx-auto">
-      {/* Header */}
-      <div
-        className="glass-card rounded-2xl p-6 border-2 border-green-500/40 
-                      bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 shadow-xl relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-teal-500/5 animate-pulse-slow"></div>
-        <div className="flex items-center justify-between relative z-10">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => navigate("/slots")}
-              className="border-green-500/40 bg-green-500/10 hover:bg-green-500/20 hover:border-green-500/60 transition-all duration-500"
-            >
-              <ArrowLeft className="w-5 h-5 text-green-500" />
-            </Button>
-            <h1 className="text-3xl font-bold text-transparent bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text">
-              {matrixType} - Detailed View
-            </h1>
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-muted-foreground">Total Slots</div>
-            <div className="text-2xl font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text">
-              {activeSlots}/{totalSlots}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Left Side - Circular Matrix */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 p-4">
+      {slotsData.map((slot, index) => (
         <div
-          className="glass-card rounded-2xl p-8 border-2 border-green-500/40
-                       bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-teal-500/5
-                       shadow-[0_10px_40px_rgba(34,197,94,0.3)] relative overflow-hidden"
+          key={slot.id}
+          className={`relative rounded-2xl p-5 md:p-6 border border-[hsl(var(--border))] 
+            bg-gradient-to-br from-[hsl(var(--gradient-blue-start))]/10 via-[hsl(var(--gradient-blue-mid))]/10 to-[hsl(var(--gradient-blue-end))]/10 
+            shadow-lg hover:shadow-[0_0_30px_hsl(var(--glow-primary))] transition-all duration-500
+            flex flex-col items-center justify-center space-y-4 text-center ${
+              index === 0 ? "glow-effect animate-pulse-glow" : ""
+            }`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-teal-500/5 animate-pulse-slow"></div>
-          <h3 className="text-xl font-bold text-center mb-6 text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text relative z-10">
-            Slot 1
-          </h3>
+          {/* Slot Header */}
+          <div className="absolute top-3 left-3 text-[hsl(var(--primary))] text-xs md:text-sm font-semibold">
+            Slot {slot.id}
+          </div>
 
-          <div className="relative w-48 h-48 mx-auto mb-6  z-10">
-            {/* Circular diagram */}
-            <div className="relative w-full h-full rounded-full overflow-hidden">
+          {/* Top-right price for all except slot 1 */}
+          {index !== 0 && (
+            <div className="absolute top-3 right-3 text-[hsl(var(--foreground))] font-bold text-sm md:text-base">
+              ${slot.price}
+            </div>
+          )}
+
+          {/* Users count */}
+          <div
+            className={`absolute top-6 left-3 font-semibold text-[10px] md:text-xs ${
+              index === 0
+                ? "text-purple-500"
+                : "text-[hsl(var(--muted-foreground))]"
+            }`}
+          >
+            Users: {slot.users}
+          </div>
+
+          {/* Slot 1 circular diagram */}
+          {index === 0 ? (
+            <div className="relative w-36 h-36 mb-2">
               {renderCircularDiagram()}
+            </div>
+          ) : (
+            <img
+              src="/logo.png"
+              alt="Slot Logo"
+              className="w-16 h-16 md:w-20 md:h-20 object-contain opacity-80 mt-6"
+            />
+          )}
 
-              {/* Center circle */}
-              <div
-                className="absolute inset-[35%] bg-background rounded-full border-4 border-green-500/60 
-                            flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.5)]"
-              >
-                <User className="w-8 h-8 text-green-500" />
-              </div>
-            </div>
-          </div>
+          {/* Price display only for slot 1 */}
+          {index === 0 && (
+            <span className="text-xl md:text-2xl font-bold text-[hsl(var(--foreground))] text-glow">
+              ${slot.price}
+            </span>
+          )}
 
-          <div className="space-y-3 text-sm relative z-10">
-            <div className="flex justify-between p-3 rounded-lg bg-green-500/10 border border-green-500/30">
-              <span className="text-muted-foreground">Active:</span>
-              <span className="font-bold text-green-500">{activeSlots}</span>
-            </div>
-            <div className="flex justify-between p-3 rounded-lg bg-green-500/10 border border-green-500/30">
-              <span className="text-muted-foreground">Remaining:</span>
-              <span className="font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text">
-                {totalSlots - activeSlots}
-              </span>
-            </div>
-            <div className="flex justify-between p-3 rounded-lg bg-green-500/10 border border-green-500/30">
-              <span className="text-muted-foreground">Total Income:</span>
-              <span className="font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text">
-                262986 USDT
-              </span>
-            </div>
-          </div>
+          {/* Activate button only for slot 2 */}
+          {slot.id === 2 && (
+            <Button
+              className="gradient-primary text-white font-bold px-4 py-1.5 md:px-6 md:py-2 rounded-lg shadow-[0_0_25px_hsl(var(--glow-primary))] 
+              hover:shadow-[0_0_40px_hsl(var(--glow-secondary))] hover:scale-105 transition-all duration-300"
+            >
+              Activate
+            </Button>
+          )}
         </div>
-
-        {/* Right Side - Slots Grid */}
-        <div className="lg:col-span-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {renderSlotGrid()}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Stats */}
-      <div
-        className="glass-card rounded-2xl p-6 border-2 border-green-500/40
-                     bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 shadow-xl relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-teal-500/5 animate-pulse-slow"></div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-          <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/30">
-            <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text mb-2">
-              {type === "global" ? "4" : "21"} USDT
-            </div>
-            <div className="text-sm text-muted-foreground">Total Earned</div>
-          </div>
-          <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/30">
-            <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text mb-2">
-              {activeSlots}
-            </div>
-            <div className="text-sm text-muted-foreground">Active Partners</div>
-          </div>
-          <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/30">
-            <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text mb-2">
-              {totalSlots - activeSlots}
-            </div>
-            <div className="text-sm text-muted-foreground">Available Slots</div>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
