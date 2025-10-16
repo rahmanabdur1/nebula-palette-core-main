@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-
+import { useParams } from "react-router-dom";
 const slotsData = [
   { id: 1, users: 289985, price: 5 },
   { id: 2, users: 37222, price: 6, active: true },
@@ -19,7 +19,8 @@ const slotsData = [
 
 const SlotsDetail = () => {
   const [loading, setLoading] = useState(true);
-
+  const { type } = useParams<{ type: string }>();
+  console.log(type);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
