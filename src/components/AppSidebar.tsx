@@ -101,19 +101,23 @@ export function AppSidebar() {
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar className="border-r border-green-500/20 bg-gradient-to-b from-green-500/5 via-emerald-500/3 to-teal-500/5">
+    <Sidebar className="border-r border-blue-500/20 bg-gradient-to-b from-blue-500/5 via-indigo-500/3 to-cyan-500/5">
       <SidebarContent>
         {/* Logo */}
         <div className="flex items-center gap-2 px-4 py-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30">
-            <Coins className="h-6 w-6 text-white" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-800 shadow-lg shadow-blue-600/30">
+            <img
+              src="/logo.png" // <-- replace with your logo path
+              alt="Logo"
+              className="h-6 w-6 object-contain"
+            />
           </div>
           {!isCollapsed && (
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text">
+              <span className="text-lg font-bold text-transparent bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text">
                 FUTURE PRO
               </span>
-              <span className="text-sm text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text font-medium">
+              <span className="text-sm text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text font-medium">
                 SPACE
               </span>
             </div>
@@ -130,8 +134,8 @@ export function AppSidebar() {
                       onClick={() => setExpandedPrograms(!expandedPrograms)}
                       className={`relative transition-all duration-500 ${
                         item.submenu.some((sub) => isActive(sub.url))
-                          ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 border-r-4 border-green-500 shadow-lg shadow-green-500/10"
-                          : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
+                          ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-500 border-r-4 border-blue-500 shadow-lg shadow-blue-500/10"
+                          : "text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10"
                       }`}
                     >
                       <item.icon className="h-4 w-4" />
@@ -156,13 +160,12 @@ export function AppSidebar() {
                                 className={({ isActive }) =>
                                   `flex items-center gap-2 px-3 py-2 text-sm transition-all duration-500 relative overflow-hidden group ${
                                     isActive
-                                      ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 font-medium border-r-4 border-green-500 shadow-lg shadow-green-500/10"
-                                      : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
+                                      ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-500 font-medium border-r-4 border-blue-500 shadow-lg shadow-blue-500/10"
+                                      : "text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10"
                                   }`
                                 }
                               >
-                                {/* Animated background effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <subItem.icon className="h-4 w-4 relative z-10" />
                                 <span className="text-base relative z-10">
                                   {subItem.title}
@@ -182,13 +185,12 @@ export function AppSidebar() {
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-3 py-2 transition-all duration-500 relative overflow-hidden group ${
                           isActive
-                            ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-500 font-medium border-r-4 border-green-500 shadow-lg shadow-green-500/10"
-                            : "text-muted-foreground hover:text-green-500 hover:bg-green-500/10"
+                            ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-500 font-medium border-r-4 border-blue-500 shadow-lg shadow-blue-500/10"
+                            : "text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10"
                         }`
                       }
                     >
-                      {/* Animated background effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       <item.icon className="h-4 w-4 relative z-10" />
                       {!isCollapsed && (
                         <span className="text-base relative z-10">

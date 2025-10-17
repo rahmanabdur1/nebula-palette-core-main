@@ -118,7 +118,7 @@ const SlotsDetail = () => {
           {/* Price display only for slot 1 */}
           {index === 0 && (
             <span className="text-xl md:text-2xl font-bold text-[hsl(var(--foreground))] text-glow">
-              ${slot.price}
+              $ {slot.price}
             </span>
           )}
 

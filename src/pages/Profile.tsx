@@ -49,19 +49,19 @@ export default function AccountInfoCard() {
   };
 
   return (
-    <div className="glass-card rounded-xl border-2 border-green-500/30 bg-gradient-to-br from-green-500/10 via-green-400/5 to-emerald-500/10 shadow-xl relative overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-4xl mx-auto">
+    <div className="glass-card rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-cyan-500/10 shadow-xl relative overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-4xl mx-auto">
       {/* Avatar + Username + Socials */}
-      <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 flex-wrap justify-between relative">
+      <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20 flex-wrap justify-between relative">
         <div className="flex items-center gap-4 relative">
           <div className="relative">
             {formData.userImage ? (
               <img
                 src={formData.userImage}
                 alt="User Avatar"
-                className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-green-500 shadow-md"
+                className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover border-2 border-blue-500 shadow-md"
               />
             ) : (
-              <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-emerald-500">
+              <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500">
                 <User className="h-8 w-8 text-white" />
               </div>
             )}
@@ -70,7 +70,7 @@ export default function AccountInfoCard() {
             {isEditing && (
               <label
                 htmlFor="userImage"
-                className="absolute bottom-0 right-0 bg-green-500 text-white p-1.5 rounded-full cursor-pointer shadow-md hover:bg-green-600 transition h-7 w-7 flex items-center justify-center"
+                className="absolute bottom-0 right-0 bg-blue-500 text-white p-1.5 rounded-full cursor-pointer shadow-md hover:bg-blue-600 transition h-7 w-7 flex items-center justify-center"
               >
                 <Camera className="h-4 w-4" />
                 <input
@@ -90,7 +90,7 @@ export default function AccountInfoCard() {
                 size="sm"
                 variant="outline"
                 onClick={() => setIsEditing(true)}
-                className="absolute top-0 right-0 h-7 w-7 p-0 flex items-center justify-center border-green-500/50 text-green-600 hover:bg-green-500/10 hover:border-green-500/70"
+                className="absolute top-0 right-0 h-7 w-7 p-0 flex items-center justify-center border-blue-500/50 text-blue-600 hover:bg-blue-500/10 hover:border-blue-500/70"
               >
                 <Edit className="h-4 w-4" />
               </Button>
@@ -104,7 +104,7 @@ export default function AccountInfoCard() {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="text-base font-semibold border-green-500/30 focus:border-green-500 focus:ring-green-500/20"
+                className="text-base font-semibold border-blue-500/30 focus:border-blue-500 focus:ring-blue-500/20"
               />
             ) : (
               <div className="text-lg sm:text-xl font-bold text-foreground">
@@ -116,10 +116,8 @@ export default function AccountInfoCard() {
 
         {/* Social Media Icons */}
         <div className="flex flex-wrap sm:flex-row gap-3 sm:gap-5 items-center">
-          {/* Telegram */}
           <a
-            href="
-https://t.me/futureprospace_officialchannel"
+            href="https://t.me/futureprospace_officialchannel"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-500 transition"
@@ -134,7 +132,6 @@ https://t.me/futureprospace_officialchannel"
             </svg>
           </a>
 
-          {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/username"
             target="_blank"
@@ -144,7 +141,6 @@ https://t.me/futureprospace_officialchannel"
             <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
           </a>
 
-          {/* Twitter */}
           <a
             href="https://twitter.com/username"
             target="_blank"
@@ -154,7 +150,6 @@ https://t.me/futureprospace_officialchannel"
             <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
           </a>
 
-          {/* Facebook */}
           <a
             href="https://www.facebook.com/junayedahmedniloy0"
             target="_blank"
@@ -167,11 +162,11 @@ https://t.me/futureprospace_officialchannel"
       </div>
 
       {/* Details Grid */}
-      <div className="grid grid-cols-2  gap-4 mt-6">
+      <div className="grid grid-cols-2 gap-4 mt-6">
         {/* Member Since */}
-        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+        <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-1">
-            <Calendar className="h-5 w-5 text-green-500" />
+            <Calendar className="h-5 w-5 text-blue-500" />
             <span className="text-sm text-muted-foreground">Member Since</span>
           </div>
           {isEditing ? (
@@ -179,19 +174,19 @@ https://t.me/futureprospace_officialchannel"
               name="joinDate"
               value={formData.joinDate}
               onChange={handleChange}
-              className="text-sm font-mono border-green-500/30 focus:border-green-500 focus:ring-green-500/20"
+              className="text-sm font-mono border-blue-500/30 focus:border-blue-500 focus:ring-blue-500/20"
             />
           ) : (
-            <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+            <div className="text-sm font-mono text-blue-400 bg-black/20 px-2 py-1 rounded border border-blue-500/10">
               {formData.joinDate}
             </div>
           )}
         </div>
 
         {/* Wallet Address */}
-        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+        <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-1">
-            <Wallet className="h-5 w-5 text-green-500" />
+            <Wallet className="h-5 w-5 text-blue-500" />
             <span className="text-sm text-muted-foreground">
               Wallet Address
             </span>
@@ -201,33 +196,33 @@ https://t.me/futureprospace_officialchannel"
               name="walletAddress"
               value={formData.walletAddress}
               onChange={handleChange}
-              className="font-mono text-sm border-green-500/30 focus:border-green-500 focus:ring-green-500/20"
+              className="font-mono text-sm border-blue-500/30 focus:border-blue-500 focus:ring-blue-500/20"
             />
           ) : (
-            <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+            <div className="text-sm font-mono text-blue-400 bg-black/20 px-2 py-1 rounded border border-blue-500/10">
               {formData.walletAddress}
             </div>
           )}
         </div>
 
         {/* User ID */}
-        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+        <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-1">
-            <User className="h-5 w-5 text-green-500" />
+            <User className="h-5 w-5 text-blue-500" />
             <span className="text-sm text-muted-foreground">User ID</span>
           </div>
-          <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+          <div className="text-sm font-mono text-blue-400 bg-black/20 px-2 py-1 rounded border border-blue-500/10">
             1856131324
           </div>
         </div>
 
         {/* Ref By */}
-        <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20 hover:shadow-md transition-shadow">
+        <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20 hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2 mb-1">
-            <User className="h-5 w-5 text-green-500" />
+            <User className="h-5 w-5 text-blue-500" />
             <span className="text-sm text-muted-foreground">Ref By</span>
           </div>
-          <div className="text-sm font-mono text-green-400 bg-black/20 px-2 py-1 rounded border border-green-500/10">
+          <div className="text-sm font-mono text-blue-400 bg-black/20 px-2 py-1 rounded border border-blue-500/10">
             4194951871
           </div>
         </div>
@@ -238,14 +233,14 @@ https://t.me/futureprospace_officialchannel"
         <div className="flex justify-end gap-2 mt-4">
           <Button
             onClick={handleSave}
-            className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 h-9 sm:h-10 px-4 text-sm shadow-md"
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-9 sm:h-10 px-4 text-sm shadow-md"
           >
             <Save className="h-4 w-4 mr-1" /> Save
           </Button>
           <Button
             variant="outline"
             onClick={() => setIsEditing(false)}
-            className="border-green-500/50 text-green-600 hover:bg-green-500/10 hover:border-green-500/70 h-9 sm:h-10 px-4 text-sm"
+            className="border-blue-500/50 text-blue-600 hover:bg-blue-500/10 hover:border-blue-500/70 h-9 sm:h-10 px-4 text-sm"
           >
             <X className="h-4 w-4 mr-1" /> Cancel
           </Button>

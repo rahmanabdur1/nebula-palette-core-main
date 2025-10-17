@@ -38,13 +38,13 @@ const Transactions = () => {
       <div className="flex justify-center gap-8 flex-wrap">
         <Button
           variant="default"
-          className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white font-semibold px-16 py-4 text-lg rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
+          className="bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 hover:from-blue-600 hover:via-indigo-600 hover:to-cyan-600 text-white font-semibold px-16 py-4 text-lg rounded-lg shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-500 hover:scale-105"
         >
           Future Matrix
         </Button>
         <Button
           variant="outline"
-          className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-16 py-4 text-lg rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
+          className="border-2 border-blue-500/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-cyan-500/5 text-foreground hover:from-blue-500/20 hover:via-indigo-500/10 hover:to-cyan-500/10 px-16 py-4 text-lg rounded-lg transition-all duration-500 hover:scale-105 hover:border-blue-500/80"
         >
           Future Global
         </Button>
@@ -54,26 +54,26 @@ const Transactions = () => {
       <div className="flex justify-center gap-6">
         <Button
           variant="default"
-          className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white font-semibold px-12 py-3 rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
+          className="bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 hover:from-blue-600 hover:via-indigo-600 hover:to-cyan-600 text-white font-semibold px-12 py-3 rounded-lg shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-500 hover:scale-105"
         >
           Self
         </Button>
         <Button
           variant="outline"
-          className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-12 py-3 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
+          className="border-2 border-blue-500/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-cyan-500/5 text-foreground hover:from-blue-500/20 hover:via-indigo-500/10 hover:to-cyan-500/10 px-12 py-3 rounded-lg transition-all duration-500 hover:scale-105 hover:border-blue-500/80"
         >
           Earning
         </Button>
       </div>
 
       {/* Transactions Table */}
-      <div className="glass-card rounded-xl p-6 border-2 border-green-500/40 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 shadow-2xl relative overflow-hidden">
+      <div className="glass-card rounded-xl p-6 border-2 border-blue-500/40 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-cyan-500/10 shadow-2xl relative overflow-hidden">
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-teal-500/5 animate-pulse-slow"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-cyan-500/5 animate-pulse-slow"></div>
 
-        <div className="relative overflow-hidden rounded-xl border-2 border-green-500/40 shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl border-2 border-blue-500/40 shadow-2xl">
           {/* Table Header */}
-          <div className="grid grid-cols-5 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white font-semibold relative">
+          <div className="grid grid-cols-5 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 text-white font-semibold relative">
             <div className="px-6 py-5 text-center">Amount</div>
             <div className="px-6 py-5 text-center">Type</div>
             <div className="px-6 py-5 text-center">User</div>
@@ -82,33 +82,33 @@ const Transactions = () => {
           </div>
 
           {/* Table Body */}
-          <div className="bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-teal-500/5 relative">
+          <div className="bg-gradient-to-br from-blue-500/5 via-indigo-500/5 to-cyan-500/5 relative">
             {transactionData.map((transaction, index) => (
               <div
                 key={index}
-                className="grid grid-cols-5 border-b border-green-500/30 last:border-b-0 hover:bg-gradient-to-r hover:from-green-500/10 hover:via-emerald-500/5 hover:to-teal-500/5 transition-all duration-500 group"
+                className="grid grid-cols-5 border-b border-blue-500/30 last:border-b-0 hover:bg-gradient-to-r hover:from-blue-500/10 hover:via-indigo-500/5 hover:to-cyan-500/5 transition-all duration-500 group"
               >
-                <div className="px-6 py-4 text-center text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text font-semibold text-lg group-hover:scale-105 transition-transform">
+                <div className="px-6 py-4 text-center text-transparent bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text font-semibold text-lg group-hover:scale-105 transition-transform">
                   {transaction.amount}
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <div className="text-foreground font-medium group-hover:text-green-500 transition-colors">
+                  <div className="text-foreground font-medium group-hover:text-blue-500 transition-colors">
                     {transaction.type}
                   </div>
-                  <div className="text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-sm font-semibold">
+                  <div className="text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-sm font-semibold">
                     {transaction.slot}
                   </div>
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <div className="bg-gradient-to-r from-green-500/15 via-emerald-500/10 to-teal-500/5 text-foreground px-4 py-2 rounded-full font-mono text-sm border border-green-500/30 group-hover:border-green-500/60 group-hover:shadow-lg group-hover:shadow-green-500/20 transition-all duration-500">
+                  <div className="bg-gradient-to-r from-blue-500/15 via-indigo-500/10 to-cyan-500/5 text-foreground px-4 py-2 rounded-full font-mono text-sm border border-blue-500/30 group-hover:border-blue-500/60 group-hover:shadow-lg group-hover:shadow-blue-500/20 transition-all duration-500">
                     {transaction.user}
                   </div>
                 </div>
-                <div className="px-6 py-4 text-center text-muted-foreground group-hover:text-green-400 transition-colors">
+                <div className="px-6 py-4 text-center text-muted-foreground group-hover:text-blue-400 transition-colors">
                   {transaction.time}
                 </div>
                 <div className="px-6 py-4 text-center">
-                  <span className="text-transparent bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text font-mono text-sm font-semibold group-hover:scale-105 transition-transform inline-block">
+                  <span className="text-transparent bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text font-mono text-sm font-semibold group-hover:scale-105 transition-transform inline-block">
                     {transaction.trx}
                   </span>
                 </div>
@@ -121,19 +121,19 @@ const Transactions = () => {
         <div className="flex justify-center gap-4 mt-8 relative">
           <Button
             variant="outline"
-            className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
+            className="border-2 border-blue-500/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-cyan-500/5 text-foreground hover:from-blue-500/20 hover:via-indigo-500/10 hover:to-cyan-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-blue-500/80"
           >
             Prev
           </Button>
           <Button
             variant="default"
-            className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 transition-all duration-500 hover:scale-105"
+            className="bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 hover:from-blue-600 hover:via-indigo-600 hover:to-cyan-600 text-white px-6 py-2 rounded-lg shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-500 hover:scale-105"
           >
             1
           </Button>
           <Button
             variant="outline"
-            className="border-2 border-green-500/60 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-teal-500/5 text-foreground hover:from-green-500/20 hover:via-emerald-500/10 hover:to-teal-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-green-500/80"
+            className="border-2 border-blue-500/60 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-cyan-500/5 text-foreground hover:from-blue-500/20 hover:via-indigo-500/10 hover:to-cyan-500/10 px-8 py-2 rounded-lg transition-all duration-500 hover:scale-105 hover:border-blue-500/80"
           >
             Next
           </Button>
