@@ -104,20 +104,20 @@ export function AppSidebar() {
     <Sidebar className="border-r border-blue-500/20 bg-gradient-to-b from-blue-500/5 via-indigo-500/3 to-cyan-500/5">
       <SidebarContent>
         {/* Logo */}
-        <div className="flex items-center gap-2 px-4 py-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-cyan-800 shadow-lg shadow-blue-600/30">
+        <div className="flex items-center gap-1 px-4 py-6">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full ">
             <img
-              src="/logo.png" // <-- replace with your logo path
+              src="/logo.png"
               alt="Logo"
-              className="h-6 w-6 object-contain"
+              className="h-10 w-10 object-contain"
             />
           </div>
           {!isCollapsed && (
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-transparent bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text">
+              <span className="text-lg font-bold text-foreground">
                 FUTURE PRO
               </span>
-              <span className="text-sm text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text font-medium">
+              <span className="text-sm text-muted-foreground font-medium">
                 SPACE
               </span>
             </div>

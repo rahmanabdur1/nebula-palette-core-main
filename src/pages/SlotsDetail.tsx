@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "react-router-dom";
 const slotsData = [
   { id: 1, users: 289985, price: 5 },
-  { id: 2, users: 37222, price: 6, active: true },
+  { id: 2, users: 37222, price: 8, active: true },
   { id: 3, users: 29673, price: 16 },
   { id: 4, users: 7401, price: 35 },
   { id: 5, users: 5872, price: 99 },

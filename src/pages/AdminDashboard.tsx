@@ -147,10 +147,10 @@ const AdminDashboard = () => {
     <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6 max-w-7xl mx-auto">
       {/* Logo & Header */}
       <div className="flex items-center gap-2 px-4 py-6">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-700 shadow-lg shadow-blue-600/30">
-          <img src={logo} alt="Logo" className="h-6 w-6 object-contain" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-full ">
+          <img src={logo} alt="Logo" className="h-14 w-14 object-contain" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-blue-500">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
           Admin Dashboard
         </h1>
       </div>
