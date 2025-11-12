@@ -1,55 +1,158 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+"use client";
 
-export function UserProfileCard() {
+import { useState, useEffect, useCallback } from "react";
+import { BrowserProvider, Contract, JsonRpcSigner } from "ethers";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+
+import ContractABI from "../../../futurepro-contract/artifacts/contracts/Lock.sol/FutureProSpace.json";
+
+const CONTRACT_ADDRESS = "0x0BBd69fc5E3711A408DaB21B2f4D2c061b3d1E11";
+
+// ---- MetaMask Type Definition ----
+interface EthereumProvider {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+  isMetaMask?: boolean;
+}
+
+declare global {
+  interface Window {
+    ethereum?: EthereumProvider;
+  }
+}
+
+export default function UserRegisterAndProfile() {
+  const [wallet, setWallet] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>("");
+  const [joinedDate, setJoinedDate] = useState<string | null>(null);
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // ✅ Connect Wallet
+  const connectWallet = async () => {
+    if (!window.ethereum) {
+      alert("Please install MetaMask");
+      return;
+    }
+
+    try {
+      const provider = new BrowserProvider(window.ethereum);
+      const accounts = (await provider.send(
+        "eth_requestAccounts",
+        []
+      )) as string[];
+      setWallet(accounts[0]);
+    } catch (error) {
+      console.error("Wallet connection failed:", error);
+    }
+  };
+
+  // ✅ Load user profile (memoized with useCallback)
+  const loadUserProfile = useCallback(async () => {
+    if (!wallet || !window.ethereum) return;
+
+    try {
+      const provider = new BrowserProvider(window.ethereum);
+      const signer: JsonRpcSigner = await provider.getSigner();
+      const contract = new Contract(CONTRACT_ADDRESS, ContractABI.abi, signer);
+
+      const registered: boolean = await contract.isUserRegistered(wallet);
+      setIsRegistered(registered);
+
+      if (registered) {
+        const name: string = await contract.getUsername(wallet);
+        const joinedTimestamp: bigint = await contract.getJoinedDate(wallet);
+        const date = new Date(
+          Number(joinedTimestamp) * 1000
+        ).toLocaleDateString();
+        setUsername(name);
+        setJoinedDate(date);
+      }
+    } catch (error) {
+      console.error("Error loading user profile:", error);
+    }
+  }, [wallet]);
+
+  // ✅ Register new user
+  const registerUser = async () => {
+    if (!wallet || !username) return alert("Enter a username first!");
+
+    setLoading(true);
+    try {
+      const provider = new BrowserProvider(window.ethereum);
+      const signer: JsonRpcSigner = await provider.getSigner();
+      const contract = new Contract(CONTRACT_ADDRESS, ContractABI.abi, signer);
+
+      const tx = await contract.registerUser(username, wallet);
+      await tx.wait();
+
+      alert("✅ Registration successful!");
+      setIsRegistered(true);
+      await loadUserProfile();
+    } catch (error) {
+      console.error("Registration failed:", error);
+      alert("❌ Registration failed. Check console.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Auto-load profile when wallet changes
+  useEffect(() => {
+    if (wallet) {
+      loadUserProfile();
+    }
+  }, [wallet, loadUserProfile]);
+
+  // ---- UI Section ----
   return (
     <div
-      className="glass-card rounded-xl border-2 border-blue-500/30 
-                 bg-gradient-to-br from-blue-500/5 via-indigo-500/5 to-cyan-500/5 
-                 shadow-xl p-3 sm:p-4 md:p-5 lg:p-6 w-full mx-auto"
+      className="glass-card rounded-2xl border border-blue-400/30 
+      bg-gradient-to-br from-blue-500/5 via-indigo-500/10 to-cyan-500/5 
+      p-6 w-full max-w-md mx-auto shadow-xl"
     >
-      <div
-        className="flex flex-row items-center justify-start 
-                   gap-2 sm:gap-2 md:gap-3 lg:gap-4"
-      >
-        {/* Avatar */}
-        <div className="relative flex-shrink-0">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 p-[2px] sm:p-[2px] md:p-[3px] lg:p-[4px]">
-            <div className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 rounded-full bg-background"></div>
-          </div>
+      <h2 className="text-xl font-bold text-center mb-4 text-blue-500">
+        User Profile
+      </h2>
 
-          <Avatar className="relative z-10 h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24">
+      {!wallet ? (
+        <Button onClick={connectWallet} className="w-full">
+          🔗 Connect Wallet
+        </Button>
+      ) : !isRegistered ? (
+        <div className="flex flex-col space-y-3">
+          <p className="text-sm text-muted-foreground text-center">
+            Connected: {wallet.slice(0, 6)}...{wallet.slice(-4)}
+          </p>
+          <input
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="p-2 border border-blue-300 rounded-md"
+          />
+          <Button onClick={registerUser} disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </Button>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center space-y-3">
+          <Avatar className="h-20 w-20">
             <AvatarImage src="/logo.png" alt="User Avatar" />
-            <AvatarFallback className="bg-muted text-lg sm:text-xl md:text-2xl">
-              RX
-            </AvatarFallback>
+            <AvatarFallback>{username[0]?.toUpperCase() ?? "U"}</AvatarFallback>
           </Avatar>
+          <p className="text-sm font-medium text-foreground">
+            👤 Username: <span className="text-blue-500">{username}</span>
+          </p>
+          <p className="text-sm text-foreground">
+            🕒 Joined on:{" "}
+            <span className="text-muted-foreground">{joinedDate ?? "-"}</span>
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Wallet: {wallet.slice(0, 6)}...{wallet.slice(-4)}
+          </p>
         </div>
-
-        {/* User Info */}
-        <div className="md:flex flex-col grid grid-cols-2 justify-center space-y-[1px] p-0 m-0">
-          <div className="text-[10px] sm:text-xs font-semibold text-foreground">
-            ID:{" "}
-            <span className="font-mono font-normal text-muted-foreground">
-              1856131324
-            </span>
-          </div>
-          <div className="text-[10px] sm:text-xs font-semibold text-foreground">
-            Wallet:{" "}
-            <span className="font-mono font-normal text-muted-foreground">
-              0x77...0efC
-            </span>
-          </div>
-          <div className="text-xs sm:text-sm font-semibold text-foreground">
-            Username: <span className="text-blue-500 font-medium">RX T</span>
-          </div>
-          <div className="text-[10px] sm:text-xs font-semibold text-foreground">
-            Joined on:{" "}
-            <span className="font-normal text-muted-foreground">
-              31/08/2024
-            </span>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
