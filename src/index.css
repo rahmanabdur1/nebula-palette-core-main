@@ -115,7 +115,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground min-h-screen;
-    background: linear-gradient(135deg, hsl(var(--background)), hsl(220 13% 8%));
+    /* background: linear-gradient(135deg, hsl(var(--background)), hsl(220 13% 8%)); */
   }
   
   /* Custom utilities */

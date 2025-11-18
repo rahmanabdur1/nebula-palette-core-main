@@ -3,8 +3,10 @@ import { UserProfileCard } from "./UserProfileCard";
 import { StatsCard } from "./StatsCard";
 import { ReferralCard } from "./ReferralCard";
 import { Skeleton } from "@/components/ui/skeleton";
-
+import { useWallet } from "@/context/WalletContext";
 export function Dashboard() {
+  const { account } = useWallet();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export function Dashboard() {
     <div className="max-w-7xl mx-auto px-[5px] flex flex-col sm:gap-0 gap-3 sm:px-6 lg:px-8 py-[5px] sm:py-6 md:py-8 space-y-[5px] sm:space-y-6 md:space-y-8">
       {/* Top Row - UserProfileCard & ReferralCard */}
       <div className="grid grid-cols-1 gap-[5px] sm:gap-6 md:gap-8 lg:grid-cols-2 lg:gap-10">
-        <UserProfileCard />
+        <UserProfileCard account={account ?? ""} />
         <ReferralCard />
       </div>
 
